@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.cms.mapper.AttachMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.cms.domain.Attach" >
+    <id column="tb_id" property="id" jdbcType="VARCHAR" />
+    <result column="tb_host_id" property="hostId" jdbcType="VARCHAR" />
+    <result column="tb_table_name" property="tableName" jdbcType="VARCHAR" />
+    <result column="tb_type" property="type" jdbcType="VARCHAR" />
+    <result column="tb_file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="tb_origin_file_name" property="originFileName" jdbcType="VARCHAR" />
+    <result column="tb_file_type" property="fileType" jdbcType="VARCHAR" />
+    <result column="tb_path" property="path" jdbcType="VARCHAR" />
+    <result column="tb_size" property="size" jdbcType="BIGINT" />
+    <result column="tb_whether_delete" property="whetherDelete" jdbcType="INTEGER" />
+    <result column="tb_create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="tb_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="tb_update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="tb_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tb.id as tb_id, tb.host_id as tb_host_id, tb.table_name as tb_table_name, tb.type as tb_type, 
+    tb.file_name as tb_file_name, tb.origin_file_name as tb_origin_file_name, tb.file_type as tb_file_type, 
+    tb.path as tb_path, tb.size as tb_size, tb.whether_delete as tb_whether_delete, tb.create_by as tb_create_by, 
+    tb.create_time as tb_create_time, tb.update_by as tb_update_by, tb.update_time as tb_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from scl_common_attach tb
+    where tb.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from scl_common_attach
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.cms.domain.Attach" >
+    insert into scl_common_attach (id, host_id, table_name, 
+      type, file_name, origin_file_name, 
+      file_type, path, size, 
+      whether_delete, create_by, create_time, 
+      update_by, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{hostId,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{originFileName,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, 
+      #{whetherDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.cms.domain.Attach" >
+    insert into scl_common_attach
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hostId != null" >
+        host_id,
+      </if>
+      <if test="tableName != null" >
+        table_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="originFileName != null" >
+        origin_file_name,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="hostId != null" >
+        #{hostId,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="originFileName != null" >
+        #{originFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="whetherDelete != null" >
+        #{whetherDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.cms.domain.Attach" >
+    update scl_common_attach
+    <set >
+      <if test="hostId != null" >
+        host_id = #{hostId,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null" >
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="originFileName != null" >
+        origin_file_name = #{originFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.cms.domain.Attach" >
+    update scl_common_attach
+    set host_id = #{hostId,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      origin_file_name = #{originFileName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="listByHostId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from scl_common_attach tb
+    where tb.host_id = #{hostId, jdbcType=VARCHAR}
+  </select>
+</mapper>

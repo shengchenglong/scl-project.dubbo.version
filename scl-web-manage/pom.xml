@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.scl</groupId>
+		<artifactId>scl</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../scl/pom.xml</relativePath>
+	</parent>
+	<artifactId>scl-web-manage</artifactId>
+	<packaging>war</packaging>
+	<name>scl-web-manage</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<shiro.version>1.4.0-RC2</shiro.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+				
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<!-- 权限 shiro-spirng 其中依赖了shiro-web shiro-core -->
+		<dependency>
+		    <groupId>org.crazycake</groupId>
+		    <artifactId>shiro-redis</artifactId>
+		    <version>2.4.2.1-RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-ehcache -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-ehcache</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+
+
+		
+		<!-- <dependency> <groupId>com.github.theborakompanioni</groupId> <artifactId>thymeleaf-extras-shiro</artifactId> 
+			<version>1.2.1</version> </dependency> -->
+
+		<!-- springboot starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
+		<!-- 如果没有这个配置的话，那么打包出来会包含tomcat的jar包，整个war文件都会变大，
+			第二就是如果版本是一样的， 比如我这里是8.0的，那么是不会报错的，如果是7.0的tomcat的话，那么就启动报错了。 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<!--<scope>provided</scope>-->
+		</dependency>
+		<!-- spring cache 里面依赖了 spring redis -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.lambdaworks/lettuce -->
+<!-- 		<dependency>
+		    <groupId>com.lambdaworks</groupId>
+		    <artifactId>lettuce</artifactId>
+		    <version>2.3.3</version>
+		</dependency> -->
+		
+		
+		<!-- spring boot中访问jsp报404,application.properties配置和代码结构如下，其中application.properties的配置如下， 
+			其中prefix中包含"WEB-INF",自己调试发现ResourceHttpRequestHandler.isInvalidPath中判断有"WEB-INF"返回true表示路径非法，
+			直接跳转到错误页面了 添加pom文件解决 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<!--<scope>provided</scope>-->
+		</dependency>
+		
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-websocket</artifactId> 
+			</dependency> -->
+
+		<!-- 本地依赖 -->
+		<dependency>
+			<groupId>com.scl</groupId>
+			<artifactId>scl-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scl</groupId>
+			<artifactId>scl-api-user</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.scl</groupId>
+			<artifactId>scl-api-cms</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>scl-web-manage</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

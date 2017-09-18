@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.user.mapper.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.user.domain.SysMenu" >
+    <id column="tb_ID" property="id" jdbcType="VARCHAR" />
+    <result column="tb_ENAME" property="ename" jdbcType="VARCHAR" />
+    <result column="tb_CNAME" property="cname" jdbcType="VARCHAR" />
+    <result column="tb_APPLICATION" property="application" jdbcType="VARCHAR" />
+    <result column="tb_PERMISSION" property="permission" jdbcType="VARCHAR" />
+    <result column="tb_PARENT_ID" property="parentId" jdbcType="VARCHAR" />
+    <result column="tb_URL" property="url" jdbcType="VARCHAR" />
+    <result column="tb_SORT_INDEX" property="sortIndex" jdbcType="INTEGER" />
+    <result column="tb_IS_LEAF" property="isLeaf" jdbcType="INTEGER" />
+    <result column="tb_LEAF_HIERARCHY" property="leafHierarchy" jdbcType="INTEGER" />
+    <result column="tb_TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="tb_MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="tb_MODULE_ENAME" property="moduleEname" jdbcType="VARCHAR" />
+    <result column="tb_IMAGE" property="image" jdbcType="VARCHAR" />
+    <result column="tb_CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="tb_CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="tb_UPDATE_BY" property="updateBy" jdbcType="VARCHAR" />
+    <result column="tb_UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tb.ID as tb_ID, tb.ENAME as tb_ENAME, tb.CNAME as tb_CNAME, tb.APPLICATION as tb_APPLICATION, 
+    tb.PERMISSION as tb_PERMISSION, tb.PARENT_ID as tb_PARENT_ID, tb.URL as tb_URL, tb.SORT_INDEX as tb_SORT_INDEX, 
+    tb.IS_LEAF as tb_IS_LEAF, tb.LEAF_HIERARCHY as tb_LEAF_HIERARCHY, tb.TYPE as tb_TYPE, 
+    tb.MODULE_ID as tb_MODULE_ID, tb.MODULE_ENAME as tb_MODULE_ENAME, tb.IMAGE as tb_IMAGE, 
+    tb.CREATE_BY as tb_CREATE_BY, tb.CREATE_TIME as tb_CREATE_TIME, tb.UPDATE_BY as tb_UPDATE_BY, 
+    tb.UPDATE_TIME as tb_UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu tb
+    where tb.ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_menu
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.user.domain.SysMenu" >
+    insert into sys_menu (ID, ENAME, CNAME, 
+      APPLICATION, PERMISSION, PARENT_ID, 
+      URL, SORT_INDEX, IS_LEAF, 
+      LEAF_HIERARCHY, TYPE, MODULE_ID, 
+      MODULE_ENAME, IMAGE, CREATE_BY, 
+      CREATE_TIME, UPDATE_BY, UPDATE_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+      #{application,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{sortIndex,jdbcType=INTEGER}, #{isLeaf,jdbcType=INTEGER}, 
+      #{leafHierarchy,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{moduleId,jdbcType=VARCHAR}, 
+      #{moduleEname,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.user.domain.SysMenu" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ename != null" >
+        ENAME,
+      </if>
+      <if test="cname != null" >
+        CNAME,
+      </if>
+      <if test="application != null" >
+        APPLICATION,
+      </if>
+      <if test="permission != null" >
+        PERMISSION,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="sortIndex != null" >
+        SORT_INDEX,
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF,
+      </if>
+      <if test="leafHierarchy != null" >
+        LEAF_HIERARCHY,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="moduleEname != null" >
+        MODULE_ENAME,
+      </if>
+      <if test="image != null" >
+        IMAGE,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="application != null" >
+        #{application,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null" >
+        #{sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=INTEGER},
+      </if>
+      <if test="leafHierarchy != null" >
+        #{leafHierarchy,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleEname != null" >
+        #{moduleEname,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.user.domain.SysMenu" >
+    update sys_menu
+    <set >
+      <if test="ename != null" >
+        ENAME = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null" >
+        CNAME = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="application != null" >
+        APPLICATION = #{application,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        PERMISSION = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sortIndex != null" >
+        SORT_INDEX = #{sortIndex,jdbcType=INTEGER},
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF = #{isLeaf,jdbcType=INTEGER},
+      </if>
+      <if test="leafHierarchy != null" >
+        LEAF_HIERARCHY = #{leafHierarchy,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null" >
+        MODULE_ID = #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleEname != null" >
+        MODULE_ENAME = #{moduleEname,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        IMAGE = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.user.domain.SysMenu" >
+    update sys_menu
+    set ENAME = #{ename,jdbcType=VARCHAR},
+      CNAME = #{cname,jdbcType=VARCHAR},
+      APPLICATION = #{application,jdbcType=VARCHAR},
+      PERMISSION = #{permission,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      SORT_INDEX = #{sortIndex,jdbcType=INTEGER},
+      IS_LEAF = #{isLeaf,jdbcType=INTEGER},
+      LEAF_HIERARCHY = #{leafHierarchy,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=VARCHAR},
+      MODULE_ID = #{moduleId,jdbcType=VARCHAR},
+      MODULE_ENAME = #{moduleEname,jdbcType=VARCHAR},
+      IMAGE = #{image,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM sys_menu
+  </select>
+</mapper>

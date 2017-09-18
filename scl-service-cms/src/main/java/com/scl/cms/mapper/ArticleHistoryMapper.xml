@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.cms.mapper.ArticleHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.cms.domain.ArticleHistory" >
+    <id column="tb_id" property="id" jdbcType="VARCHAR" />
+    <result column="tb_article_id" property="articleId" jdbcType="VARCHAR" />
+    <result column="tb_operate_flag" property="operateFlag" jdbcType="INTEGER" />
+    <result column="tb_operate_by" property="operateBy" jdbcType="VARCHAR" />
+    <result column="tb_operate_time" property="operateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scl.cms.domain.ArticleHistory" extends="BaseResultMap" >
+    <result column="tb_article_content_old" property="articleContentOld" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tb.id as tb_id, tb.article_id as tb_article_id, tb.operate_flag as tb_operate_flag, 
+    tb.operate_by as tb_operate_by, tb.operate_time as tb_operate_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    tb.article_content_old as tb_article_content_old
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from scl_cms_article_history tb
+    where tb.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from scl_cms_article_history
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.cms.domain.ArticleHistory" >
+    insert into scl_cms_article_history (id, article_id, operate_flag, 
+      operate_by, operate_time, article_content_old
+      )
+    values (#{id,jdbcType=VARCHAR}, #{articleId,jdbcType=VARCHAR}, #{operateFlag,jdbcType=INTEGER}, 
+      #{operateBy,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{articleContentOld,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.cms.domain.ArticleHistory" >
+    insert into scl_cms_article_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
+      <if test="operateFlag != null" >
+        operate_flag,
+      </if>
+      <if test="operateBy != null" >
+        operate_by,
+      </if>
+      <if test="operateTime != null" >
+        operate_time,
+      </if>
+      <if test="articleContentOld != null" >
+        article_content_old,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateFlag != null" >
+        #{operateFlag,jdbcType=INTEGER},
+      </if>
+      <if test="operateBy != null" >
+        #{operateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContentOld != null" >
+        #{articleContentOld,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.cms.domain.ArticleHistory" >
+    update scl_cms_article_history
+    <set >
+      <if test="articleId != null" >
+        article_id = #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="operateFlag != null" >
+        operate_flag = #{operateFlag,jdbcType=INTEGER},
+      </if>
+      <if test="operateBy != null" >
+        operate_by = #{operateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleContentOld != null" >
+        article_content_old = #{articleContentOld,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scl.cms.domain.ArticleHistory" >
+    update scl_cms_article_history
+    set article_id = #{articleId,jdbcType=VARCHAR},
+      operate_flag = #{operateFlag,jdbcType=INTEGER},
+      operate_by = #{operateBy,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP},
+      article_content_old = #{articleContentOld,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.cms.domain.ArticleHistory" >
+    update scl_cms_article_history
+    set article_id = #{articleId,jdbcType=VARCHAR},
+      operate_flag = #{operateFlag,jdbcType=INTEGER},
+      operate_by = #{operateBy,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

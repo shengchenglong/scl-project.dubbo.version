@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="scl-web-manage" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
+
+	<!-- 生成远程服务代理，可以像使用本地bean一样使用userService -->
+	<dubbo:reference id="sysUserService" interface="com.scl.user.service.SysUserService" group="user"/>
+	<dubbo:reference id="sysRoleService" interface="com.scl.user.service.SysRoleService" group="user"/>
+	<dubbo:reference id="sysResourceService" interface="com.scl.user.service.SysResourceService" group="user"/>
+	<!--<dubbo:reference id="sysOrganizationService" interface="com.scl.user.service.SysOrganizationService"/>-->
+	<!--<dubbo:reference id="sysMenuService" interface="com.scl.user.service.SysMenuService"/>-->
+
+	<!-- 这里不使用注解的方式，是因为：
+		shiro的org.apache.shiro.spring.web.ShiroFilterFactoryBean会实现spring的bean注入拦截器,
+		当shirofilter开始注入成功后就会拦截到每一个spring将执行注入的操作,然而这个拦截器也没做什么动作,就是判断了一下是否是一个filter的实现类,不是就转发了.
+		以上代码只是简述,但是终究问题出在只要你给filter配置了securityManager就会导致dubbo的service无法注入,
+		然而securityManager涉及代码太多了,由于时间有限,也没仔细去调试,毕竟是shiro的核心嘛... 
+		简单分析:
+		因为spring的读取配置文件是一个一个扫描的,若扫描到是对象就会直接实例化(未配置lazy-init的情况下),若扫描到到annotation这种或者scan这种则会先做记录.
+		那么如果使用注解扫描方式的话,就会导致shiro的filter比dubbo的扫描先执行,那么shiro就会拦截掉dubbo(先大概这样猜测,不对请勿喷)的注入,
+		但如果使用配置文件的话,spring扫描到dubbo的配置就立马先实例化了这些对象的代理,这样dubbo的实例化就比shiro的filter要先了,
+		结果自然就不一样了(此处只是打比方,当然实际上没那么简单,只为容易理解)
+		-->
+	 <dubbo:annotation package="com.scl"/>
+		
+	<dubbo:consumer check="false" />
+	
+
+</beans>

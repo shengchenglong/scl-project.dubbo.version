@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.cms.mapper.ColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.cms.domain.Column" >
+    <id column="tb_id" property="id" jdbcType="VARCHAR" />
+    <result column="tb_site_code" property="siteCode" jdbcType="VARCHAR" />
+    <result column="tb_parent_code" property="parentCode" jdbcType="VARCHAR" />
+    <result column="tb_code" property="code" jdbcType="VARCHAR" />
+    <result column="tb_parent_column_codes" property="parentColumnCodes" jdbcType="VARCHAR" />
+    <result column="tb_layer" property="layer" jdbcType="INTEGER" />
+    <result column="tb_sort" property="sort" jdbcType="INTEGER" />
+    <result column="tb_whether_delete" property="whetherDelete" jdbcType="INTEGER" />
+    <result column="tb_create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="tb_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="tb_update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="tb_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tb.id as tb_id, tb.site_code as tb_site_code, tb.parent_code as tb_parent_code, tb.code as tb_code,
+    tb.parent_column_codes as tb_parent_column_codes, tb.layer as tb_layer, tb.sort as tb_sort, 
+    tb.whether_delete as tb_whether_delete, tb.create_by as tb_create_by, tb.create_time as tb_create_time, 
+    tb.update_by as tb_update_by, tb.update_time as tb_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from scl_cms_column tb
+    where tb.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from scl_cms_column
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.cms.domain.Column" >
+    insert into scl_cms_column (id, site_code, parent_code,
+      code, parent_column_codes, layer, 
+      sort, whether_delete, create_by, 
+      create_time, update_by, update_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR},
+      #{code,jdbcType=VARCHAR}, #{parentColumnCodes,jdbcType=VARCHAR}, #{layer,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{whetherDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.cms.domain.Column" >
+    insert into scl_cms_column
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteCode != null" >
+        site_code,
+      </if>
+      <if test="parentCode != null" >
+        parent_code,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="parentColumnCodes != null" >
+        parent_column_codes,
+      </if>
+      <if test="layer != null" >
+        layer,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="siteCode != null" >
+        #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="parentColumnCodes != null" >
+        #{parentColumnCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="layer != null" >
+        #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="whetherDelete != null" >
+        #{whetherDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.cms.domain.Column" >
+    update scl_cms_column
+    <set >
+      <if test="siteCode != null" >
+        site_code = #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="parentColumnCodes != null" >
+        parent_column_codes = #{parentColumnCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="layer != null" >
+        layer = #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.cms.domain.Column" >
+    update scl_cms_column
+    set site_code = #{siteCode,jdbcType=VARCHAR},
+      parent_code = #{parentCode,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      parent_column_codes = #{parentColumnCodes,jdbcType=VARCHAR},
+      layer = #{layer,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--查询column，并将item项组装进去-->
+  <resultMap id="BaseResultMapWithItems" extends="BaseResultMap" type="com.scl.cms.domain.Column">
+    <collection property="columnItems" ofType="com.scl.cms.domain.ColumnItem" column="tb_id" select="com.scl.cms.mapper.ColumnItemMapper.listColumnItemsByColumnId"/>
+  </resultMap>
+
+  <select id="listColumnWithItemsByCode" resultMap="BaseResultMapWithItems">
+    SELECT
+    <include refid="Base_Column_List" />
+    from scl_cms_column tb
+    WHERE tb.code = #{columnCode,jdbcType=VARCHAR}
+    AND tb.site_code = #{siteCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="listColumnWithItemsByParentCode" resultMap="BaseResultMapWithItems">
+    SELECT
+    <include refid="Base_Column_List" />
+    from scl_cms_column tb
+    WHERE tb.parent_code = #{parentCode,jdbcType=VARCHAR}
+    AND tb.site_code = #{siteCode,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

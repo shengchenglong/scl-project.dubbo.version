@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.cms.mapper.SiteMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.cms.domain.Site" >
+    <id column="tb_id" property="id" jdbcType="VARCHAR" />
+    <result column="tb_parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="tb_name" property="name" jdbcType="VARCHAR" />
+    <result column="tb_code" property="code" jdbcType="VARCHAR" />
+    <result column="tb_language_code" property="languageCode" jdbcType="VARCHAR" />
+    <result column="tb_default_language" property="defaultLanguage" jdbcType="VARCHAR" />
+    <result column="tb_sort" property="sort" jdbcType="INTEGER" />
+    <result column="tb_whether_delete" property="whetherDelete" jdbcType="INTEGER" />
+    <result column="tb_create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="tb_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="tb_update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="tb_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tb.id as tb_id, tb.parent_id as tb_parent_id, tb.name as tb_name, tb.code as tb_code,
+    tb.language_code as tb_language_code, tb.default_language as tb_default_language, tb.sort as tb_sort, tb.whether_delete as tb_whether_delete,
+    tb.create_by as tb_create_by, tb.create_time as tb_create_time, tb.update_by as tb_update_by,
+    tb.update_time as tb_update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from scl_cms_site tb
+    where tb.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from scl_cms_site
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.cms.domain.Site" >
+    insert into scl_cms_site (id, parent_id, `name`,
+      code, language_code, default_language,
+      sort, whether_delete, create_by, create_time,
+      update_by, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{languageCode,jdbcType=VARCHAR}, #{defaultLanguage,jdbcType=VARCHAR},
+      #{sort,jdbcType=INTEGER}, #{whetherDelete,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.cms.domain.Site" >
+    insert into scl_cms_site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="languageCode != null" >
+        language_code,
+      </if>
+      <if test="defaultLanguage != null" >
+        default_language,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        #{language_code,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultLanguage != null" >
+        #{defaultLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="whetherDelete != null" >
+        #{whether_delete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.cms.domain.Site" >
+    update scl_cms_site
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        language_code = #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultLanguage != null" >
+        default_language = #{defaultLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete = #{whether_delete,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.cms.domain.Site" >
+    update scl_cms_site
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      language_code = #{languageCode,jdbcType=VARCHAR},
+      default_language = #{defaultLanguage,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!--联合查询子站点-->
+  <resultMap id="BaseResultMapWithChildSites" type="com.scl.cms.domain.Site" extends="BaseResultMap">
+    <collection property="childSites" ofType="com.scl.cms.domain.Site" column="tb_id" select="listChildSitesByParentId"/>
+  </resultMap>
+
+  <select id="listChildSitesByParentId" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM scl_cms_site tb
+    WHERE tb.parent_id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <!--查询所有主站点，联合查询所有子站点-->
+  <select id="getAllParentSiteWithChildrenSite" resultMap="BaseResultMapWithChildSites">
+    SELECT <include refid="Base_Column_List"/>
+    FROM scl_cms_site tb
+    WHERE tb.parent_id IS NULL
+    AND tb.whether_delete = 0
+    ORDER BY tb.sort
+  </select>
+
+  <!--查询条件-->
+  <sql id="listParam">
+    <if test="parentId != null">
+      and tb.parent_id = #{parentId, jdbcType=VARCHAR}
+    </if>
+    <if test="name != null">
+      and tb.name = #{name, jdbcType=VARCHAR}
+    </if>
+    <if test="code != null">
+      and tb.code = #{code, jdbcType=VARCHAR}
+    </if>
+    <if test="languageCode != null">
+      and tb.language_code = #{languageCode, jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <!--根据条件查询-->
+  <select id="listByParam" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM scl_cms_site tb
+    WHERE <include refid="listParam" />
+  </select>
+
+  <!--批量新增站点-->
+  <insert id="insertBatch" parameterType="com.scl.cms.domain.Site">
+    insert into scl_cms_site (id, parent_id, `name`,
+      code, language_code, default_language,
+      sort, whether_delete, create_by, create_time,
+      update_by, update_time)
+    values
+    <foreach collection="sites" separator="," item="site">
+      (#{site.id}, #{site.parentId}, #{site.name}, #{site.code}, #{site.languageCode},
+      #{site.defaultLanguage}, #{site.sort}, #{site.whetherDelete}, #{site.createBy}, #{site.createTime},
+      #{site.updateBy}, #{site.updateTime})
+    </foreach>
+  </insert>
+
+  <!--批量删除-->
+  <update id="deleteBatchById" parameterType="java.lang.String">
+    UPDATE scl_cms_site
+    SET whether_delete = 1
+    WHERE id in (
+      <foreach collection="ids" item="id" separator=",">
+        #{id}
+      </foreach>
+    )
+  </update>
+
+  <update id="updateBatchByIdSelective" parameterType="com.scl.cms.domain.Site">
+    <foreach collection="sites" item="site" separator=";">
+      UPDATE scl_cms_site
+      <set >
+        <if test="parentId != null" >
+          parent_id = #{site.parentId,jdbcType=VARCHAR},
+        </if>
+        <if test="name != null" >
+          `name` = #{site.name,jdbcType=VARCHAR},
+        </if>
+        <if test="code != null" >
+          code = #{site.code,jdbcType=VARCHAR},
+        </if>
+        <if test="languageCode != null" >
+          language_code = #{site.languageCode,jdbcType=VARCHAR},
+        </if>
+        <if test="defaultLanguage != null" >
+          default_language = #{site.defaultLanguage,jdbcType=VARCHAR},
+        </if>
+        <if test="sort != null" >
+          sort = #{site.sort,jdbcType=INTEGER},
+        </if>
+        <if test="whetherDelete != null" >
+          whether_delete = #{site.whether_delete,jdbcType=INTEGER},
+        </if>
+        <if test="createBy != null" >
+          create_by = #{site.createBy,jdbcType=VARCHAR},
+        </if>
+        <if test="createTime != null" >
+          create_time = #{site.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateBy != null" >
+          update_by = #{site.updateBy,jdbcType=VARCHAR},
+        </if>
+        <if test="updateTime != null" >
+          update_time = #{site.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where id = #{site.id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+</mapper>

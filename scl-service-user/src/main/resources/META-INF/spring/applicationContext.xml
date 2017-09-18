@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="scl-service-user" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" />
+
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20882" />
+
+	<!-- 用rest协议在9090端口暴露服务 -->
+	<!-- <dubbo:protocol name="rest" port="9082" threads="500" contextpath="services" 
+		server="tomcat" accepts="500" /> -->
+
+	<!--扫描的方式注入dubbo服务-->
+	<dubbo:annotation package="com.scl.user.service"/>
+
+	<!--去掉重试机制-->
+	<dubbo:provider group="user" delay="-1" timeout="6000"  retries="0" />
+
+	<!--＊＊＊＊＊＊说明：一下情况已经在dubbox 2.8.4版本中解决了＊＊＊＊＊＊＊-->
+	<!-- 1.这里会发现 如果service 没有注入成功 即 没有provider，那么dubbo服务不会启动 但是项目可以正常启动成一个普通应用 -->
+	<!-- 2.分析后发现：导致上面的dubbo service注解不生效是因为 它与 Spring的transactional注解有冲突 -->
+	<!-- 3.解决方案：1.。。。2.。。。3.使用配置，不使用扫描注解的方式 -->
+	<!--<bean id="sysOrganizationService" class="com.scl.user.service.SysOrganizationServiceImpl"/>-->
+	<!--<dubbo:service interface="com.scl.user.service.SysOrganizationService" ref="sysOrganizationService"/>-->
+	<!--<bean id="sysUserService" class="com.scl.user.service.SysUserServiceImpl"/>-->
+	<!--<dubbo:service interface="com.scl.user.service.SysUserService" ref="sysUserService"/>-->
+	<!--<bean id="sysResourceService" class="com.scl.user.service.SysResourceServiceImpl"/>-->
+	<!--<dubbo:service interface="com.scl.user.service.SysResourceService" ref="sysResourceService"/>-->
+	<!--<bean id="sysRoleService" class="com.scl.user.service.SysRoleServiceImpl"/>-->
+	<!--<dubbo:service interface="com.scl.user.service.SysRoleService" ref="sysRoleService"/>-->
+	<!--<bean id="sysMenuService" class="com.scl.user.service.SysMenuServiceImpl"/>-->
+	<!--<dubbo:service interface="com.scl.user.service.SysMenuService" ref="sysMenuService"/>-->
+
+
+</beans>

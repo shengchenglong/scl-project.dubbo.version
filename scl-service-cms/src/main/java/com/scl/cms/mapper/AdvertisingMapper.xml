@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.cms.mapper.AdvertisingMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.cms.domain.Advertising" >
+    <id column="tb_id" property="id" jdbcType="VARCHAR" />
+    <result column="tb_site_code" property="siteCode" jdbcType="VARCHAR" />
+    <result column="tb_column_code" property="columnCode" jdbcType="VARCHAR" />
+    <result column="tb_language_code" property="languageCode" jdbcType="VARCHAR" />
+    <result column="tb_location_code" property="locationCode" jdbcType="VARCHAR" />
+    <result column="tb_title" property="title" jdbcType="VARCHAR" />
+    <result column="tb_url" property="url" jdbcType="VARCHAR" />
+    <result column="tb_publish_status" property="publishStatus" jdbcType="INTEGER" />
+    <result column="tb_whether_delete" property="whetherDelete" jdbcType="INTEGER" />
+    <result column="tb_sort" property="sort" jdbcType="INTEGER" />
+    <result column="tb_summary" property="summary" jdbcType="VARCHAR" />
+    <result column="tb_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="tb_begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="tb_end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="tb_publish_by" property="publishBy" jdbcType="VARCHAR" />
+    <result column="tb_publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="tb_create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="tb_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="tb_update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="tb_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tb.id as tb_id, tb.site_code as tb_site_code, tb.column_code as tb_column_code, tb.language_code as tb_language_code, 
+    tb.location_code as tb_location_code, tb.title as tb_title, tb.url as tb_url, tb.publish_status as tb_publish_status, 
+    tb.whether_delete as tb_whether_delete, tb.sort as tb_sort, tb.summary as tb_summary, 
+    tb.remark as tb_remark, tb.begin_time as tb_begin_time, tb.end_time as tb_end_time, 
+    tb.publish_by as tb_publish_by, tb.publish_time as tb_publish_time, tb.create_by as tb_create_by, 
+    tb.create_time as tb_create_time, tb.update_by as tb_update_by, tb.update_time as tb_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.scl.cms.domain.AdvertisingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from scl_cms_advertising tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from scl_cms_advertising tb
+    where tb.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from scl_cms_advertising
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.cms.domain.Advertising" >
+    insert into scl_cms_advertising (id, site_code, column_code, 
+      language_code, location_code, title, 
+      url, publish_status, whether_delete, 
+      sort, summary, remark, 
+      begin_time, end_time, publish_by, 
+      publish_time, create_by, create_time, 
+      update_by, update_time)
+    values (#{id,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR}, #{columnCode,jdbcType=VARCHAR}, 
+      #{languageCode,jdbcType=VARCHAR}, #{locationCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{publishStatus,jdbcType=INTEGER}, #{whetherDelete,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{beginTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{publishBy,jdbcType=VARCHAR}, 
+      #{publishTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.cms.domain.Advertising" >
+    insert into scl_cms_advertising
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteCode != null" >
+        site_code,
+      </if>
+      <if test="columnCode != null" >
+        column_code,
+      </if>
+      <if test="languageCode != null" >
+        language_code,
+      </if>
+      <if test="locationCode != null" >
+        location_code,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="publishStatus != null" >
+        publish_status,
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="publishBy != null" >
+        publish_by,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="siteCode != null" >
+        #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="columnCode != null" >
+        #{columnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationCode != null" >
+        #{locationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null" >
+        #{publishStatus,jdbcType=INTEGER},
+      </if>
+      <if test="whetherDelete != null" >
+        #{whetherDelete,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishBy != null" >
+        #{publishBy,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.scl.cms.domain.AdvertisingExample" resultType="java.lang.Integer" >
+    select count(*) from scl_cms_advertising tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.cms.domain.Advertising" >
+    update scl_cms_advertising
+    <set >
+      <if test="siteCode != null" >
+        site_code = #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="columnCode != null" >
+        column_code = #{columnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        language_code = #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationCode != null" >
+        location_code = #{locationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null" >
+        publish_status = #{publishStatus,jdbcType=INTEGER},
+      </if>
+      <if test="whetherDelete != null" >
+        whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishBy != null" >
+        publish_by = #{publishBy,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.cms.domain.Advertising" >
+    update scl_cms_advertising
+    set site_code = #{siteCode,jdbcType=VARCHAR},
+      column_code = #{columnCode,jdbcType=VARCHAR},
+      language_code = #{languageCode,jdbcType=VARCHAR},
+      location_code = #{locationCode,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      publish_status = #{publishStatus,jdbcType=INTEGER},
+      whether_delete = #{whetherDelete,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      summary = #{summary,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      publish_by = #{publishBy,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.scl.cms.domain.AdvertisingExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from scl_cms_advertising tb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

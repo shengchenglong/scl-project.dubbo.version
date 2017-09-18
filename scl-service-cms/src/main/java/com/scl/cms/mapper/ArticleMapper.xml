@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scl.cms.mapper.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.scl.cms.domain.Article" >
+    <id column="tb_id" property="id" jdbcType="VARCHAR" />
+    <result column="tb_site_id" property="siteId" jdbcType="VARCHAR" />
+    <result column="tb_relevance_id" property="relevanceId" jdbcType="VARCHAR" />
+    <result column="tb_column_id" property="columnId" jdbcType="VARCHAR" />
+    <result column="tb_language_code" property="languageCode" jdbcType="VARCHAR" />
+    <result column="tb_parent_column_codes" property="parentColumnCodes" jdbcType="VARCHAR" />
+    <result column="tb_title" property="title" jdbcType="VARCHAR" />
+    <result column="tb_subtitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="tb_summary" property="summary" jdbcType="VARCHAR" />
+    <result column="tb_type" property="type" jdbcType="INTEGER" />
+    <result column="tb_whether_top" property="whetherTop" jdbcType="INTEGER" />
+    <result column="tb_publish_status" property="publishStatus" jdbcType="INTEGER" />
+    <result column="tb_sort" property="sort" jdbcType="INTEGER" />
+    <result column="tb_author" property="author" jdbcType="VARCHAR" />
+    <result column="tb_keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="tb_source" property="source" jdbcType="VARCHAR" />
+    <result column="tb_url_custom" property="urlCustom" jdbcType="VARCHAR" />
+    <result column="tb_url_link" property="urlLink" jdbcType="VARCHAR" />
+    <result column="tb_tag" property="tag" jdbcType="VARCHAR" />
+    <result column="tb_remark" property="remark" jdbcType="VARCHAR" />
+    <result column="tb_begin_time" property="beginTime" jdbcType="TIMESTAMP" />
+    <result column="tb_end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="tb_publish_by" property="publishBy" jdbcType="VARCHAR" />
+    <result column="tb_publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="tb_create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="tb_create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="tb_update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="tb_update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.scl.cms.domain.Article" extends="BaseResultMap" >
+    <result column="tb_content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tb.id as tb_id, tb.site_id as tb_site_id, tb.relevance_id as tb_relevance_id, tb.column_id as tb_column_id, 
+    tb.language_code as tb_language_code, tb.parent_column_codes as tb_parent_column_codes, 
+    tb.title as tb_title, tb.subtitle as tb_subtitle, tb.summary as tb_summary, tb.type as tb_type, 
+    tb.whether_top as tb_whether_top, tb.publish_status as tb_publish_status, tb.sort as tb_sort, 
+    tb.author as tb_author, tb.keyword as tb_keyword, tb.source as tb_source, tb.url_custom as tb_url_custom, 
+    tb.url_link as tb_url_link, tb.tag as tb_tag, tb.remark as tb_remark, tb.begin_time as tb_begin_time, 
+    tb.end_time as tb_end_time, tb.publish_by as tb_publish_by, tb.publish_time as tb_publish_time, 
+    tb.create_by as tb_create_by, tb.create_time as tb_create_time, tb.update_by as tb_update_by, 
+    tb.update_time as tb_update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    tb.content as tb_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from scl_cms_article tb
+    where tb.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from scl_cms_article
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.scl.cms.domain.Article" >
+    insert into scl_cms_article (id, site_id, relevance_id, 
+      column_id, language_code, parent_column_codes, 
+      title, subtitle, summary, 
+      type, whether_top, publish_status, 
+      sort, author, keyword, 
+      source, url_custom, url_link, 
+      tag, remark, begin_time, 
+      end_time, publish_by, publish_time, 
+      create_by, create_time, update_by, 
+      update_time, content)
+    values (#{id,jdbcType=VARCHAR}, #{siteId,jdbcType=VARCHAR}, #{relevanceId,jdbcType=VARCHAR}, 
+      #{columnId,jdbcType=VARCHAR}, #{languageCode,jdbcType=VARCHAR}, #{parentColumnCodes,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{whetherTop,jdbcType=INTEGER}, #{publishStatus,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{urlCustom,jdbcType=VARCHAR}, #{urlLink,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{publishBy,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scl.cms.domain.Article" >
+    insert into scl_cms_article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteId != null" >
+        site_id,
+      </if>
+      <if test="relevanceId != null" >
+        relevance_id,
+      </if>
+      <if test="columnId != null" >
+        column_id,
+      </if>
+      <if test="languageCode != null" >
+        language_code,
+      </if>
+      <if test="parentColumnCodes != null" >
+        parent_column_codes,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="subtitle != null" >
+        subtitle,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="whetherTop != null" >
+        whether_top,
+      </if>
+      <if test="publishStatus != null" >
+        publish_status,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="urlCustom != null" >
+        url_custom,
+      </if>
+      <if test="urlLink != null" >
+        url_link,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="beginTime != null" >
+        begin_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="publishBy != null" >
+        publish_by,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=VARCHAR},
+      </if>
+      <if test="relevanceId != null" >
+        #{relevanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnId != null" >
+        #{columnId,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentColumnCodes != null" >
+        #{parentColumnCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="whetherTop != null" >
+        #{whetherTop,jdbcType=INTEGER},
+      </if>
+      <if test="publishStatus != null" >
+        #{publishStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="urlCustom != null" >
+        #{urlCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="urlLink != null" >
+        #{urlLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishBy != null" >
+        #{publishBy,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scl.cms.domain.Article" >
+    update scl_cms_article
+    <set >
+      <if test="siteId != null" >
+        site_id = #{siteId,jdbcType=VARCHAR},
+      </if>
+      <if test="relevanceId != null" >
+        relevance_id = #{relevanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="columnId != null" >
+        column_id = #{columnId,jdbcType=VARCHAR},
+      </if>
+      <if test="languageCode != null" >
+        language_code = #{languageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentColumnCodes != null" >
+        parent_column_codes = #{parentColumnCodes,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="whetherTop != null" >
+        whether_top = #{whetherTop,jdbcType=INTEGER},
+      </if>
+      <if test="publishStatus != null" >
+        publish_status = #{publishStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="urlCustom != null" >
+        url_custom = #{urlCustom,jdbcType=VARCHAR},
+      </if>
+      <if test="urlLink != null" >
+        url_link = #{urlLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null" >
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishBy != null" >
+        publish_by = #{publishBy,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scl.cms.domain.Article" >
+    update scl_cms_article
+    set site_id = #{siteId,jdbcType=VARCHAR},
+      relevance_id = #{relevanceId,jdbcType=VARCHAR},
+      column_id = #{columnId,jdbcType=VARCHAR},
+      language_code = #{languageCode,jdbcType=VARCHAR},
+      parent_column_codes = #{parentColumnCodes,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      whether_top = #{whetherTop,jdbcType=INTEGER},
+      publish_status = #{publishStatus,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      url_custom = #{urlCustom,jdbcType=VARCHAR},
+      url_link = #{urlLink,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      publish_by = #{publishBy,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scl.cms.domain.Article" >
+    update scl_cms_article
+    set site_id = #{siteId,jdbcType=VARCHAR},
+      relevance_id = #{relevanceId,jdbcType=VARCHAR},
+      column_id = #{columnId,jdbcType=VARCHAR},
+      language_code = #{languageCode,jdbcType=VARCHAR},
+      parent_column_codes = #{parentColumnCodes,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      whether_top = #{whetherTop,jdbcType=INTEGER},
+      publish_status = #{publishStatus,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      url_custom = #{urlCustom,jdbcType=VARCHAR},
+      url_link = #{urlLink,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      publish_by = #{publishBy,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
