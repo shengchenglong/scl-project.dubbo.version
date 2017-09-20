@@ -12,7 +12,6 @@ import com.scl.resultType.MsgBean;
 import com.scl.utils.SerializeUtil;
 import com.scl.utils.UuidUtil;
 import com.scl.utils.BeanUtils;
-import org.apache.curator.SessionFailRetryLoop;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.crazycake.shiro.RedisCacheManager;
