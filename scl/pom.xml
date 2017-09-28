@@ -113,6 +113,7 @@
 		<module>../scl-common</module>
 
 		<module>../scl-web-manage</module>
+		<module>../scl-web-manage-v2</module>
 		<module>../scl-web-portal</module>
 
     </modules>
